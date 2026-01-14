@@ -7,26 +7,98 @@
     <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-    <header>
-        <img src="./images/logo.png" alt="Hanna & Pontus Wedding Logo" class="logo center"/>
+    <header class="center">
+        <img src="./images/logo.png" alt="Hanna & Pontus Wedding Logo" class="logo"/>
+        <div class="language-flags">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Sweden.svg" alt="Swedish" class="flag" onclick="setLanguage('sv')"/>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Flag_of_Finland.svg" alt="Finnish" class="flag" onclick="setLanguage('fi')"/>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg" alt="English" class="flag" onclick="setLanguage('en')"/>
+        </div>
     </header>
     <main class="container">
-        <h1>RSVP</h1>
+        <h1>RSVP for <span id="guestname">Guest</span></h1>
         <form id="rsvpform">
-            <label for="guestname">Name:</label>
-            <input type="text" id="guestname" name="guestname" required/>
-            <label for="attending">Will you attend?</label>
-            <select id="attending" name="attending" required>
-                <option value="">Select an option</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
+            <div id="group-members">
+                <!-- Dynamically populated with group members -->
+            </div>
             <button type="submit">Submit RSVP</button>
         </form>
+        <div id="confirmation" style="display: none;">
+            <h2>Thank you!</h2>
+            <p>Your RSVP has been submitted. You can update it anytime.</p>
+        </div>
     </main>
     <footer class="center">
         <p>© 2026 Hanna & Pontus. All rights reserved.</p>
-    </footer>   
-    
+    </footer>
+    <script src="scripts.js"></script>
+    <script>
+        // Load group data and populate form
+        async function loadRSVPData() {
+            const group = getGroupData();
+            if (!group) {
+                alert('No group data found. Please verify again.');
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            const container = document.getElementById('group-members');
+            group.forEach((member, index) => {
+                const div = document.createElement('div');
+                div.className = 'card';
+                div.innerHTML = `
+                    <h3>${member.name}</h3>
+                    <label>Attending:</label>
+                    <select name="attending-${index}" required>
+                        <option value="">Select</option>
+                        <option value="yes" ${member.rsvp === 'yes' ? 'selected' : ''}>Yes</option>
+                        <option value="no" ${member.rsvp === 'no' ? 'selected' : ''}>No</option>
+                    </select>
+                    <label>Dietary Restrictions:</label>
+                    <input type="text" name="dietary-${index}" value="${member.dietary || ''}" placeholder="e.g., vegetarian"/>
+                    <label>Need Bus Transport:</label>
+                    <select name="transport-${index}">
+                        <option value="no" ${member.transport === 'no' ? 'selected' : ''}>No</option>
+                        <option value="yes" ${member.transport === 'yes' ? 'selected' : ''}>Yes</option>
+                    </select>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        // Handle form submission
+        document.getElementById('rsvpform').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const group = getGroupData();
+            const updates = [];
+            
+            group.forEach((member, index) => {
+                updates.push({
+                    name: member.name,
+                    rsvp: formData.get(`attending-${index}`),
+                    dietary: formData.get(`dietary-${index}`) || '',
+                    transport: formData.get(`transport-${index}`) || 'no'
+                });
+            });
+            
+            const rsvpData = { groupId: group[0].groupId, updates };
+            if (!rsvpData.groupId || !rsvpData.updates.length) {
+                alert('Invalid data: groupId or updates missing.');
+                return;
+            }
+            console.log('Sending RSVP data:', rsvpData); // Debug log
+            const result = await submitRSVP(rsvpData);
+            if (result.success) {
+                document.getElementById('rsvpform').style.display = 'none';
+                document.getElementById('confirmation').style.display = 'block';
+            } else {
+                alert(result.message || 'Submission failed.');
+            }
+        });
+        
+        // Load on page load
+        document.addEventListener('DOMContentLoaded', loadRSVPData);
+    </script>
 </body>
 </html>
