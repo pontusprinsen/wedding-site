@@ -31,10 +31,8 @@ function getGroupData() {
     return data ? JSON.parse(data) : null;
 }
 
-// API endpoints (replace with your Google Apps Script URLs)
-//const API_BASE = 'https://script.google.com/macros/s/AKfycbw26EWidzf_Q1V6_QQPyJZjRC8Px0aBpKcw3DbpFQj2M9ota05dZIC2SPTNHJzBM5xo/exec';
-//Remove proxy before deployment
-const API_BASE = 'https://cors-anywhere.herokuapp.com/https://script.google.com/macros/s/AKfycbw26EWidzf_Q1V6_QQPyJZjRC8Px0aBpKcw3DbpFQj2M9ota05dZIC2SPTNHJzBM5xo/exec';
+// API endpoints (Google Apps Script URLs - CORS handled by GitHub Pages HTTPS)
+const API_BASE = 'https://script.google.com/macros/s/AKfycbw26EWidzf_Q1V6_QQPyJZjRC8Px0aBpKcw3DbpFQj2M9ota05dZIC2SPTNHJzBM5xo/exec';
 
 
 const VERIFY_ENDPOINT = `${API_BASE}?action=verify`;
