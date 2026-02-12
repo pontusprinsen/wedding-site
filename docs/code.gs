@@ -75,15 +75,16 @@ function doGet(e) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-// POST: Submit RSVP (body: JSON with group updates)
+// POST: Submit RSVP (action=rsvp, body: JSON with group updates)
 function doPost(e) {
   try {
-    Logger.log('doPost called');
+    const action = e.parameter.action;
+    Logger.log('doPost called with action: ' + action);
     Logger.log('Post data: ' + e.postData.contents);
     const data = JSON.parse(e.postData.contents); // Expected: { groupId: '123', updates: [{ name: 'John', rsvp: 'yes', dietary: 'vegan', transport: 'yes' }, ...] }
     Logger.log('Parsed data: ' + JSON.stringify(data));
     
-    if (data.groupId && data.updates && Array.isArray(data.updates)) {
+    if (action === 'rsvp' && data.groupId && data.updates && Array.isArray(data.updates)) {
       const sheet = getSheet();
       const sheetData = sheet.getDataRange().getValues();
       
