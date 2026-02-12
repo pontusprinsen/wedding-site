@@ -75,35 +75,41 @@ function doGet(e) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-// POST: Submit RSVP (action=rsvp, body: JSON with group updates)
+// POST: Submit RSVP (body: JSON with group updates)
 function doPost(e) {
-  const action = e.parameter.action;
-  Logger.log('doPost called with action: ' + action);
-  Logger.log('Post data: ' + e.postData.contents);
-  const data = JSON.parse(e.postData.contents); // Expected: { groupId: '123', updates: [{ name: 'John', rsvp: 'yes', dietary: 'vegan', transport: 'yes' }, ...] }
-  Logger.log('Parsed data: ' + JSON.stringify(data));
-  
-  if (action === 'rsvp' && data.groupId && data.updates) {
-    const sheet = getSheet();
-    const sheetData = sheet.getDataRange().getValues();
+  try {
+    Logger.log('doPost called');
+    Logger.log('Post data: ' + e.postData.contents);
+    const data = JSON.parse(e.postData.contents); // Expected: { groupId: '123', updates: [{ name: 'John', rsvp: 'yes', dietary: 'vegan', transport: 'yes' }, ...] }
+    Logger.log('Parsed data: ' + JSON.stringify(data));
     
-    data.updates.forEach(update => {
-      for (let i = 1; i < sheetData.length; i++) {
-        if (sheetData[i][0] === update.name && sheetData[i][1] == data.groupId) { // Match name and group
-          sheet.getRange(i + 1, 3).setValue(update.rsvp); // Column C: RSVP
-          sheet.getRange(i + 1, 4).setValue(update.dietary); // Column D: Dietary
-          sheet.getRange(i + 1, 5).setValue(update.transport); // Column E: Transport
-          break;
+    if (data.groupId && data.updates && Array.isArray(data.updates)) {
+      const sheet = getSheet();
+      const sheetData = sheet.getDataRange().getValues();
+      
+      data.updates.forEach(update => {
+        for (let i = 1; i < sheetData.length; i++) {
+          if (sheetData[i][0] === update.name && sheetData[i][1] == data.groupId) { // Match name and group
+            sheet.getRange(i + 1, 3).setValue(update.rsvp); // Column C: RSVP
+            sheet.getRange(i + 1, 4).setValue(update.dietary); // Column D: Dietary
+            sheet.getRange(i + 1, 5).setValue(update.transport); // Column E: Transport
+            break;
+          }
         }
-      }
-    });
+      });
+      
+      return ContentService
+        .createTextOutput(JSON.stringify({ success: true, message: 'RSVP updated successfully!' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
     
     return ContentService
-      .createTextOutput(JSON.stringify({ success: true, message: 'RSVP updated successfully!' }))
+      .createTextOutput(JSON.stringify({ success: false, message: 'Invalid RSVP data. Missing groupId or updates.' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    Logger.log('Error in doPost: ' + error.toString());
+    return ContentService
+      .createTextOutput(JSON.stringify({ success: false, message: 'Server error: ' + error.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
   }
-  
-  return ContentService
-    .createTextOutput(JSON.stringify({ success: false, message: 'Invalid RSVP data.' }))
-    .setMimeType(ContentService.MimeType.JSON);
 }

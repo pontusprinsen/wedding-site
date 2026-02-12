@@ -59,7 +59,7 @@ async function verifyGuest(name) {
 // Submit RSVP
 async function submitRSVP(rsvpData) {
     try {
-        const response = await fetch(RSVP_ENDPOINT, {
+        const response = await fetch(API_BASE, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(rsvpData)
