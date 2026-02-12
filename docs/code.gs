@@ -75,13 +75,22 @@ function doGet(e) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+// Handle CORS preflight requests
+function doOptions(e) {
+  return ContentService
+    .createTextOutput('')
+    .addHeader('Access-Control-Allow-Origin', '*')
+    .addHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    .addHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
+
 // POST: Submit RSVP (action=rsvp, body: JSON with group updates)
 function doPost(e) {
   try {
     const action = e.parameter.action;
     Logger.log('doPost called with action: ' + action);
     Logger.log('Post data: ' + e.postData.contents);
-    const data = JSON.parse(e.postData.contents); // Expected: { groupId: '123', updates: [{ name: 'John', rsvp: 'yes', dietary: 'vegan', transport: 'yes' }, ...] }
+    const data = JSON.parse(e.postData.contents);
     Logger.log('Parsed data: ' + JSON.stringify(data));
     
     if (action === 'rsvp' && data.groupId && data.updates && Array.isArray(data.updates)) {
@@ -90,27 +99,39 @@ function doPost(e) {
       
       data.updates.forEach(update => {
         for (let i = 1; i < sheetData.length; i++) {
-          if (sheetData[i][0] === update.name && sheetData[i][1] == data.groupId) { // Match name and group
-            sheet.getRange(i + 1, 3).setValue(update.rsvp); // Column C: RSVP
-            sheet.getRange(i + 1, 4).setValue(update.dietary); // Column D: Dietary
-            sheet.getRange(i + 1, 5).setValue(update.transport); // Column E: Transport
+          if (sheetData[i][0] === update.name && sheetData[i][1] == data.groupId) {
+            sheet.getRange(i + 1, 3).setValue(update.rsvp);
+            sheet.getRange(i + 1, 4).setValue(update.dietary);
+            sheet.getRange(i + 1, 5).setValue(update.transport);
             break;
           }
         }
       });
       
+      const response = { success: true, message: 'RSVP updated successfully!' };
       return ContentService
-        .createTextOutput(JSON.stringify({ success: true, message: 'RSVP updated successfully!' }))
-        .setMimeType(ContentService.MimeType.JSON);
+        .createTextOutput(JSON.stringify(response))
+        .setMimeType(ContentService.MimeType.JSON)
+        .addHeader('Access-Control-Allow-Origin', '*')
+        .addHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        .addHeader('Access-Control-Allow-Headers', 'Content-Type');
     }
     
+    const response = { success: false, message: 'Invalid RSVP data. Missing groupId or updates.' };
     return ContentService
-      .createTextOutput(JSON.stringify({ success: false, message: 'Invalid RSVP data. Missing groupId or updates.' }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .createTextOutput(JSON.stringify(response))
+      .setMimeType(ContentService.MimeType.JSON)
+      .addHeader('Access-Control-Allow-Origin', '*')
+      .addHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+      .addHeader('Access-Control-Allow-Headers', 'Content-Type');
   } catch (error) {
     Logger.log('Error in doPost: ' + error.toString());
+    const response = { success: false, message: 'Server error: ' + error.toString() };
     return ContentService
-      .createTextOutput(JSON.stringify({ success: false, message: 'Server error: ' + error.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .createTextOutput(JSON.stringify(response))
+      .setMimeType(ContentService.MimeType.JSON)
+      .addHeader('Access-Control-Allow-Origin', '*')
+      .addHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+      .addHeader('Access-Control-Allow-Headers', 'Content-Type');
   }
 }

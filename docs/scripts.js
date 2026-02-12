@@ -32,7 +32,7 @@ function getGroupData() {
 }
 
 // API endpoints (Google Apps Script URLs - CORS handled by GitHub Pages HTTPS)
-const API_BASE = 'https://script.google.com/macros/s/AKfycbw26EWidzf_Q1V6_QQPyJZjRC8Px0aBpKcw3DbpFQj2M9ota05dZIC2SPTNHJzBM5xo/exec';
+const API_BASE = 'https://script.google.com/macros/s/AKfycbygi1KN85bAjT8rhjnzI3JJNfdooP02jpoAA1ioIZJ8cY5ZTCRwCJR1Sti5bocI10vF/exec';
 
 
 const VERIFY_ENDPOINT = `${API_BASE}?action=verify`;
