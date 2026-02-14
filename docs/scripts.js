@@ -58,18 +58,14 @@ async function verifyGuest(name) {
 
 // Submit RSVP
 async function submitRSVP(rsvpData) {
-    try {
-        const response = await fetch(RSVP_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(rsvpData)
-        });
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('RSVP submission error:', error);
-        return { success: false, message: 'Network error. Please try again.' };
-    }
+  const body = 'payload=' + encodeURIComponent(JSON.stringify(rsvpData));
+  return fetch(RSVP_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body,
+    credentials: 'omit'
+  })
+  .then(res => res.json());
 }
 
 // Utility: Get URL parameter

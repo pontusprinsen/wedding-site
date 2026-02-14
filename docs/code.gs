@@ -87,16 +87,32 @@ function doOptions(e) {
 // POST: Submit RSVP (action=rsvp, body: JSON with group updates)
 function doPost(e) {
   try {
-    const action = e.parameter.action;
-    Logger.log('doPost called with action: ' + action);
-    Logger.log('Post data: ' + e.postData.contents);
-    const data = JSON.parse(e.postData.contents);
+    Logger.log('doPost called. e.parameter: ' + JSON.stringify(e.parameter));
+    const raw = (e.postData && e.postData.contents) || '';
+    let body = null;
+
+    // If form-encoded like "payload=%7B...%7D", try to extract payload
+    if (e.parameter && e.parameter.payload) {
+      body = typeof e.parameter.payload === 'string' ? e.parameter.payload : JSON.stringify(e.parameter.payload);
+    } else if (raw && raw.indexOf('payload=') === 0) {
+      body = decodeURIComponent(raw.replace(/^payload=/, ''));
+    } else if (raw && raw.trim().startsWith('{')) {
+      body = raw;
+    }
+
+    if (!body) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ success: false, message: 'No payload received.' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    const data = typeof body === 'string' ? JSON.parse(body) : body;
     Logger.log('Parsed data: ' + JSON.stringify(data));
-    
-    if (action === 'rsvp' && data.groupId && data.updates && Array.isArray(data.updates)) {
+
+    if (data && data.groupId && Array.isArray(data.updates)) {
       const sheet = getSheet();
       const sheetData = sheet.getDataRange().getValues();
-      
+
       data.updates.forEach(update => {
         for (let i = 1; i < sheetData.length; i++) {
           if (sheetData[i][0] === update.name && sheetData[i][1] == data.groupId) {
@@ -107,31 +123,19 @@ function doPost(e) {
           }
         }
       });
-      
-      const response = { success: true, message: 'RSVP updated successfully!' };
+
       return ContentService
-        .createTextOutput(JSON.stringify(response))
-        .setMimeType(ContentService.MimeType.JSON)
-        .addHeader('Access-Control-Allow-Origin', '*')
-        .addHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-        .addHeader('Access-Control-Allow-Headers', 'Content-Type');
+        .createTextOutput(JSON.stringify({ success: true, message: 'RSVP updated successfully!' }))
+        .setMimeType(ContentService.MimeType.JSON);
     }
-    
-    const response = { success: false, message: 'Invalid RSVP data. Missing groupId or updates.' };
+
     return ContentService
-      .createTextOutput(JSON.stringify(response))
-      .setMimeType(ContentService.MimeType.JSON)
-      .addHeader('Access-Control-Allow-Origin', '*')
-      .addHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-      .addHeader('Access-Control-Allow-Headers', 'Content-Type');
+      .createTextOutput(JSON.stringify({ success: false, message: 'Invalid RSVP data. Missing groupId or updates.' }))
+      .setMimeType(ContentService.MimeType.JSON);
   } catch (error) {
     Logger.log('Error in doPost: ' + error.toString());
-    const response = { success: false, message: 'Server error: ' + error.toString() };
     return ContentService
-      .createTextOutput(JSON.stringify(response))
-      .setMimeType(ContentService.MimeType.JSON)
-      .addHeader('Access-Control-Allow-Origin', '*')
-      .addHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-      .addHeader('Access-Control-Allow-Headers', 'Content-Type');
+      .createTextOutput(JSON.stringify({ success: false, message: 'Server error: ' + error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
