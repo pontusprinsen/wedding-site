@@ -75,15 +75,6 @@ function doGet(e) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-// Handle CORS preflight requests
-function doOptions(e) {
-  return ContentService
-    .createTextOutput('')
-    .addHeader('Access-Control-Allow-Origin', '*')
-    .addHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-    .addHeader('Access-Control-Allow-Headers', 'Content-Type');
-}
-
 // POST: Submit RSVP (action=rsvp, body: JSON with group updates)
 function doPost(e) {
   try {
