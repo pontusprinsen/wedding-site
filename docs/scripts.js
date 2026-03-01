@@ -217,7 +217,6 @@ const translations = {
             transportLabel: 'Tarvitseeko bussin:',
             footerText: '© 2026 Hanna & Pontus.'
         }
-        }
     }
 };
 
