@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hanna & Pontus Wedding</title>
+    <title data-i18n="index.title">Hanna & Pontus Wedding</title>
     <link rel="stylesheet" href="styles.css"/>
     <link rel="preconnect" href="https://script.google.com" crossorigin>
     <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
@@ -20,10 +20,10 @@
 
     </header>
     <main class="container center">
-        <p>Enter your name to continue to wedding site.</p>
+        <p data-i18n="index.prompt">Enter your name to continue to wedding site.</p>
         <form id="nameform">
-            <input type="text" id="guestname" placeholder="First & last name" required/>
-            <button type="submit">Enter</button>
+            <input type="text" id="guestname" placeholder="First & last name" data-i18n-placeholder="index.placeholder" required/>
+            <button type="submit" data-i18n="index.enter">Enter</button>
         </form>
         <div id="error-message" style="color: red; display: none;"></div>
     </main>
@@ -44,7 +44,8 @@
             if (result.success) {
                 window.location.href = 'wedding.html';
             } else {
-                errorDiv.textContent = result.message || 'Name not found. Please check spelling.';
+                const msg = result.message || t('index.errorNotFound');
+                errorDiv.textContent = msg;
                 errorDiv.style.display = 'block';
             }
         });

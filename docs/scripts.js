@@ -2,9 +2,10 @@
 
 // Language switching (placeholder - implement with i18n library if needed)
 function setLanguage(lang) {
+    if (!translations[lang]) return;
     // Store language preference
     localStorage.setItem('language', lang);
-    // Reload page or update text dynamically
+    // reload page so any dynamic content is reconstructed
     location.reload();
 }
 
@@ -74,11 +75,173 @@ function getUrlParam(param) {
     return urlParams.get(param);
 }
 
+// simple internationalization support
+const translations = {
+    en: {
+        index: {
+            title: 'Hanna & Pontus Wedding',
+            prompt: 'Enter your name to continue to wedding site.',
+            placeholder: 'First & last name',
+            enter: 'Enter',
+            errorNotFound: 'Name not found. Please check spelling.'
+        },
+        wedding: {
+            mainHeading: "We're getting married!",
+            welcome: 'Join us as we celebrate our love surrounded by the people we cherish most. We can\'t wait to share this special day with you!',
+            details: 'We\'re saying our vows on <strong>Saturday, June 13th, 2026</strong> at <strong>3:00 PM</strong> at the beautiful <strong>Kuorasjärven kartano</strong>. Please arrive at least 15 minutes before the ceremony starts. After the ceremony, we\'ll celebrate together with food, drinks, and dancing right there at the venue. Our preliminary schedule has the dining starting at 5:00 PM.',
+            gift: 'As a wedding gift, we are asking for contributions towards our honeymoon fund. It can be deposited in the following bank account:<br/><strong>IBAN:</strong> FI53 3939 0038 8658 12<br/><strong>Recipient:</strong> Hanna Koskela<br/>Thank you for helping us create unforgettable memories together!',
+            dress: 'Please dress formally — we\'d love for you to look and feel your best as we celebrate together!',
+            invite: 'The invite is only valid for the named people.',
+            travelTitle: 'Travel & Accommodation',
+            travelBus: 'Bus transport to and from Seinäjoki will be provided. Please indicate your need for transport in the RSVP form.',
+            travelHotels: 'Below you can find recommended hotels in Seinäjoki close to the train station.',
+            venueTitle: 'Venue Details',
+            venueAddress: '<strong>Address:</strong> Hiidenniementie 11, Sydänmaa, Alavus',
+            rsvpButton: 'RSVP Now'
+        },
+        rsvp: {
+            pageTitle: 'RSVP',
+            submit: 'Submit RSVP',
+            thankYouTitle: 'Thank you!',
+            thankYouText: 'Your RSVP has been submitted. You can update it anytime.',
+            noGroup: 'No group data found. Please verify again.',
+            invalidData: 'Invalid data: groupId or updates missing.',
+            submissionFailed: 'Submission failed.',
+            attendingLabel: 'Attending:',
+            attendingSelectDefault: 'Select',
+            yes: 'Yes',
+            no: 'No',
+            dietaryLabel: 'Dietary Restrictions:',
+            dietaryPlaceholder: 'e.g., vegetarian',
+            transportLabel: 'Need Bus Transport:'
+        }
+    },
+    sv: {
+        index: {
+            title: 'Hanna & Pontus bröllop',
+            prompt: 'Ange ditt namn för att fortsätta till bröllopssidan.',
+            placeholder: 'För- och efternamn',
+            enter: 'Sänd',
+            errorNotFound: 'Namnet hittades inte. Kontrollera stavningen.'
+        },
+        wedding: {
+            mainHeading: 'Vi ska gifta oss!',
+            welcome: 'Följ med oss när vi firar vår kärlek omgivna av de människor vi håller kära. Vi kan inte vänta med att dela denna speciella dag med dig!',
+            details: 'Vi säger våra löften lördagen den 13 juni 2026 kl. 15:00 på den vackra Kuorasjärven kartano. Vänligen kom minst 15 minuter innan ceremonins början. Efter ceremonin firar vi tillsammans med mat, dryck och dans på plats. Vår preliminära tidsplan har middagen start kl. 17:00.',
+            gift: 'Som bröllopsgåva ber vi om bidrag till vår smekmånsfond. Det kan sättas in på följande bankkonto:<br/><strong>IBAN:</strong> FI53 3939 0038 8658 12<br/><strong>Mottagare:</strong> Hanna Koskela<br/>Tack för att du hjälper oss skapa oförglömliga minnen tillsammans!',
+            dress: 'Vänligen klä dig formellt – vi skulle gärna se att du ser och känner dig som ditt bästa när vi firar tillsammans!',
+            invite: 'Inbjudan gäller endast för de namngivna personerna.',
+            travelTitle: 'Resor & boende',
+            travelBus: 'Buss till och från Seinäjoki kommer att ordnas. Vänligen ange ditt transportbehov i RSVP-formuläret.',
+            travelHotels: 'Nedan hittar du rekommenderade hotell i Seinäjoki nära tågstationen.',
+            venueTitle: 'Platsinformation',
+            venueAddress: '<strong>Adress:</strong> Hiidenniementie 11, Sydänmaa, Alavus',
+            rsvpButton: 'RSVP nu'
+        },
+        rsvp: {
+            pageTitle: 'RSVP',
+            submit: 'Skicka RSVP',
+            thankYouTitle: 'Tack!',
+            thankYouText: 'Din RSVP har skickats. Du kan uppdatera den när som helst.',
+            noGroup: 'Ingen gruppdata hittades. Verifiera igen.',
+            invalidData: 'Ogiltiga data: gruppID eller uppdateringar saknas.',
+            submissionFailed: 'Skicket misslyckades.',
+            attendingLabel: 'Närvarande:',
+            attendingSelectDefault: 'Välj',
+            yes: 'Ja',
+            no: 'Nej',
+            dietaryLabel: 'Dietrestriktioner:',
+            dietaryPlaceholder: 't.ex., vegetarisk',
+            transportLabel: 'Behöver buss:'
+        }
+    },
+    fi: {
+        index: {
+            title: 'Hanna & Pontus häät',
+            prompt: 'Syötä nimesi jatkaaksesi hääsivustolle.',
+            placeholder: 'Etunimi & sukunimi',
+            enter: 'Lähetä',
+            errorNotFound: 'Nimeä ei löytynyt. Tarkista kirjoitusasu.'
+        },
+        wedding: {
+            mainHeading: 'Olemme kihlassa!',
+            welcome: 'Liity seuraamme juhlimaan rakkauttamme ihmisten ympäröimänä, joita arvostamme eniten. Emme malta odottaa jakavamme tätä erityistä päivää kanssasi!',
+            details: 'Vaihdomme lupauksemme lauantaina 13. kesäkuuta 2026 klo 15.00 kauniissa Kuorasjärven kartanossa. Saavu mielellään vähintään 15 minuuttia ennen seremonian alkua. Seremonian jälkeen juhlimme yhdessä ruokien, juomien ja tanssin parissa. Alustava aikataulumme on, että ruokailu alkaa klo 17.00.',
+            gift: 'Häälahjana pyydämme lahjoituksia häämatkaamme varten. Ne voi tallettaa seuraavalle pankkitilille:<br/><strong>IBAN:</strong> FI53 3939 0038 8658 12<br/><strong>Saaja:</strong> Hanna Koskela<br/>Kiitos, että autat meitä luomaan unohtumattomia muistoja yhdessä!',
+            dress: 'Pukeudu virallisesti – haluamme, että näytät ja tunnet olosi parhaaksi juhliessamme yhdessä!',
+            invite: 'Kutsu on voimassa vain nimetylle henkilölle.',
+            travelTitle: 'Matkustus & majoitus',
+            travelBus: 'Bussi Seinäjoelle ja takaisin on järjestetty. Ilmoita kuljetustarpeestasi RSVP-lomakkeessa.',
+            travelHotels: 'Alta löydät suositeltuja hotelleja Seinäjoella lähellä rautatieasemaa.',
+            venueTitle: 'Paikan tiedot',
+            venueAddress: '<strong>Osoite:</strong> Hiidenniementie 11, Sydänmaa, Alavus',
+            rsvpButton: 'Vastaa kutsuun'
+        },
+        rsvp: {
+            pageTitle: 'RSVP',
+            submit: 'Lähetä RSVP',
+            thankYouTitle: 'Kiitos!',
+            thankYouText: 'RSVP on lähetetty. Voit päivittää sen milloin tahansa.',
+            noGroup: 'Ryhmätietoja ei löytynyt. Vahvista uudelleen.',
+            invalidData: 'Virheelliset tiedot: puuttuu groupId tai päivityksiä.',
+            submissionFailed: 'Lähetys epäonnistui.',
+            attendingLabel: 'Osallistuminen:',
+            attendingSelectDefault: 'Valitse',
+            yes: 'Kyllä',
+            no: 'Ei',
+            dietaryLabel: 'Ravintorajoitukset:',
+            dietaryPlaceholder: 'esim. kasvisruokavalio',
+            transportLabel: 'Tarvitseeko bussin:'
+        }
+    }
+};
+
+// determine current language (en/sv/fi)
+function getPreferredLanguage() {
+    let lang = localStorage.getItem('language');
+    if (lang && translations[lang]) return lang;
+    const nav = navigator.language || navigator.userLanguage || 'en';
+    const short = nav.slice(0,2).toLowerCase();
+    if (translations[short]) return short;
+    return 'en';
+}
+
+function t(key){
+    const lang = getPreferredLanguage();
+    const parts = key.split('.');
+    let obj = translations[lang];
+    for(const p of parts){
+        if (obj && typeof obj === 'object' && p in obj){
+            obj = obj[p];
+        } else {
+            return key; // fallback to key
+        }
+    }
+    return obj;
+}
+
+function applyTranslations(){
+    document.documentElement.lang = getPreferredLanguage();
+    // update title if translation exists
+    const titleKey = 'index.title';
+    const titleText = t(titleKey);
+    if (titleText && titleText !== titleKey) document.title = titleText;
+
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+        el.textContent = t(el.dataset.i18n);
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+        el.placeholder = t(el.dataset.i18nPlaceholder);
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+        el.innerHTML = t(el.dataset.i18nHtml);
+    });
+}
+
 // Page-specific logic (called on load)
 function initPage() {
-    // Language setup
-    const lang = localStorage.getItem('language') || 'en';
-    document.documentElement.lang = lang;
+    // Apply chosen or browser language
+    applyTranslations();
 
     // Check verification on protected pages
     if (window.location.pathname.includes('wedding.html') || window.location.pathname.includes('rsvp.html')) {

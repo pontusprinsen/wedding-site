@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSVP</title>
+    <title data-i18n="rsvp.pageTitle">RSVP</title>
     <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
@@ -16,16 +16,16 @@
         </div>
     </header>
     <main class="container">
-        <h1>RSVP</h1>
+        <h1 data-i18n="rsvp.pageTitle">RSVP</h1>
         <form id="rsvpform">
             <div id="group-members">
                 <!-- Dynamically populated with group members -->
             </div>
-            <button type="submit">Submit RSVP</button>
+            <button type="submit" data-i18n="rsvp.submit">Submit RSVP</button>
         </form>
         <div id="confirmation" style="display: none;">
-            <h2>Thank you!</h2>
-            <p>Your RSVP has been submitted. You can update it anytime.</p>
+            <h2 data-i18n="rsvp.thankYouTitle">Thank you!</h2>
+            <p data-i18n="rsvp.thankYouText">Your RSVP has been submitted. You can update it anytime.</p>
         </div>
     </main>
     <footer class="center">
@@ -37,7 +37,7 @@
         async function loadRSVPData() {
             const group = getGroupData();
             if (!group) {
-                alert('No group data found. Please verify again.');
+                alert(t('rsvp.noGroup'));
                 window.location.href = 'index.html';
                 return;
             }
@@ -48,18 +48,18 @@
                 div.className = 'card';
                 div.innerHTML = `
                     <h3>${member.name}</h3>
-                    <label>Attending:</label>
+                    <label>${t('rsvp.attendingLabel')}</label>
                     <select name="attending-${index}" required>
-                        <option value="">Select</option>
-                        <option value="yes" ${member.rsvp === 'yes' ? 'selected' : ''}>Yes</option>
-                        <option value="no" ${member.rsvp === 'no' ? 'selected' : ''}>No</option>
+                        <option value="">${t('rsvp.attendingSelectDefault')}</option>
+                        <option value="yes" ${member.rsvp === 'yes' ? 'selected' : ''}>${t('rsvp.yes')}</option>
+                        <option value="no" ${member.rsvp === 'no' ? 'selected' : ''}>${t('rsvp.no')}</option>
                     </select>
-                    <label>Dietary Restrictions:</label>
-                    <input type="text" name="dietary-${index}" value="${member.dietary || ''}" placeholder="e.g., vegetarian"/>
-                    <label>Need Bus Transport:</label>
+                    <label>${t('rsvp.dietaryLabel')}</label>
+                    <input type="text" name="dietary-${index}" value="${member.dietary || ''}" placeholder="${t('rsvp.dietaryPlaceholder')}"/>
+                    <label>${t('rsvp.transportLabel')}</label>
                     <select name="transport-${index}">
-                        <option value="no" ${member.transport === 'no' ? 'selected' : ''}>No</option>
-                        <option value="yes" ${member.transport === 'yes' ? 'selected' : ''}>Yes</option>
+                        <option value="no" ${member.transport === 'no' ? 'selected' : ''}>${t('rsvp.no')}</option>
+                        <option value="yes" ${member.transport === 'yes' ? 'selected' : ''}>${t('rsvp.yes')}</option>
                     </select>
                 `;
                 container.appendChild(div);
@@ -84,7 +84,7 @@
             
             const rsvpData = { groupId: group[0].groupId, updates };
             if (!rsvpData.groupId || !rsvpData.updates.length) {
-                alert('Invalid data: groupId or updates missing.');
+                alert(t('rsvp.invalidData'));
                 return;
             }
             console.log('Sending RSVP data:', rsvpData); // Debug log
@@ -93,7 +93,7 @@
                 document.getElementById('rsvpform').style.display = 'none';
                 document.getElementById('confirmation').style.display = 'block';
             } else {
-                alert(result.message || 'Submission failed.');
+                alert(result.message || t('rsvp.submissionFailed'));
             }
         });
         
