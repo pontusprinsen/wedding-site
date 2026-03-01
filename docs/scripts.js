@@ -88,15 +88,15 @@ const translations = {
         wedding: {
             mainHeading: "We're getting married!",
             welcome: 'Join us as we celebrate our love surrounded by the people we cherish most. We can\'t wait to share this special day with you!',
-            details: 'We\'re saying our vows on <strong>Saturday, June 13th, 2026</strong> at <strong>3:00 PM</strong> at the beautiful <strong>Kuorasjärven kartano</strong>. Please arrive at least 15 minutes before the ceremony starts. After the ceremony, we\'ll celebrate together with food, drinks, and dancing right there at the venue. Our preliminary schedule has the dining starting at 5:00 PM.',
-            gift: 'As a wedding gift, we are asking for contributions towards our honeymoon fund. It can be deposited in the following bank account:<br/><strong>IBAN:</strong> FI53 3939 0038 8658 12<br/><strong>Recipient:</strong> Hanna Koskela<br/>Thank you for helping us create unforgettable memories together!',
+            details: 'We\'re saying our vows on Saturday, June 13th, 2026 at 3:00 PM at the beautiful Kuorasjärven kartano. Please arrive at least 15 minutes before the ceremony starts. After the ceremony, we\'ll celebrate together with food, drinks, and dancing right there at the venue. Our preliminary schedule has the dining starting at 5:00 PM.',
+            gift: 'As a wedding gift, we are asking for contributions towards our honeymoon fund. It can be deposited in the following bank account:<br/>IBAN: FI53 3939 0038 8658 12<br/>Recipient: Hanna Koskela<br/>Thank you for helping us create unforgettable memories together!',
             dress: 'Please dress formally — we\'d love for you to look and feel your best as we celebrate together!',
             invite: 'The invite is only valid for the named people.',
             travelTitle: 'Travel & Accommodation',
             travelBus: 'Bus transport to and from Seinäjoki will be provided. Please indicate your need for transport in the RSVP form.',
             travelHotels: 'Below you can find recommended hotels in Seinäjoki close to the train station.',
             venueTitle: 'Venue Details',
-            venueAddress: '<strong>Address:</strong> Hiidenniementie 11, Sydänmaa, Alavus',
+            venueAddress: 'Address: Hiidenniementie 11, Sydänmaa, Alavus',
             rsvpButton: 'RSVP Now'
         },
         rsvp: {
@@ -118,41 +118,41 @@ const translations = {
     },
     sv: {
         index: {
-            title: 'Hanna & Pontus bröllop',
+            title: 'Hannas & Pontus bröllop',
             prompt: 'Ange ditt namn för att fortsätta till bröllopssidan.',
             placeholder: 'För- och efternamn',
             enter: 'Sänd',
             errorNotFound: 'Namnet hittades inte. Kontrollera stavningen.'
         },
         wedding: {
-            mainHeading: 'Vi ska gifta oss!',
-            welcome: 'Följ med oss när vi firar vår kärlek omgivna av de människor vi håller kära. Vi kan inte vänta med att dela denna speciella dag med dig!',
-            details: 'Vi säger våra löften lördagen den 13 juni 2026 kl. 15:00 på den vackra Kuorasjärven kartano. Vänligen kom minst 15 minuter innan ceremonins början. Efter ceremonin firar vi tillsammans med mat, dryck och dans på plats. Vår preliminära tidsplan har middagen start kl. 17:00.',
-            gift: 'Som bröllopsgåva ber vi om bidrag till vår smekmånsfond. Det kan sättas in på följande bankkonto:<br/><strong>IBAN:</strong> FI53 3939 0038 8658 12<br/><strong>Mottagare:</strong> Hanna Koskela<br/>Tack för att du hjälper oss skapa oförglömliga minnen tillsammans!',
-            dress: 'Vänligen klä dig formellt – vi skulle gärna se att du ser och känner dig som ditt bästa när vi firar tillsammans!',
+            mainHeading: 'Vi gifter oss!',
+            welcome: 'Välkomna med och fira vår kärlek. Vi ser fram emot att dela denna speciella dag med er!',
+            details: 'Vi avger våra löften lördagen den 13 juni 2026 kl. 15:00 vid Kuorasjärven kartano. Vänligen kom minst 15 minuter innan ceremonins början. Efter ceremonin fortsätter firandet på samma plats med mat, dryck och dans. Enligt vår preliminära tidsplan inleds middagen kl. 17:00.',
+            gift: 'Som bröllopsgåva ber vi om bidrag till kassan för vår smekmånad. Gåvan kan sättas in på följande bankkonto:<br/>IBAN: FI53 3939 0038 8658 12<br/>Mottagare: Hanna Koskela<br/>Tack för ert bidrag som hjälper oss skapa oförglömliga minnen tillsammans!',
+            dress: 'Vänligen klä er formellt.',
             invite: 'Inbjudan gäller endast för de namngivna personerna.',
             travelTitle: 'Resor & boende',
-            travelBus: 'Buss till och från Seinäjoki kommer att ordnas. Vänligen ange ditt transportbehov i RSVP-formuläret.',
-            travelHotels: 'Nedan hittar du rekommenderade hotell i Seinäjoki nära tågstationen.',
+            travelBus: 'Buss till och från Seinäjoki ordnas. Vänligen ange ert transportbehov i anmälningsformuläret.',
+            travelHotels: 'Nedan hittar du rekommenderade hotell i Seinäjoki.',
             venueTitle: 'Platsinformation',
-            venueAddress: '<strong>Adress:</strong> Hiidenniementie 11, Sydänmaa, Alavus',
-            rsvpButton: 'RSVP nu'
+            venueAddress: 'Adress: Hiidenniementie 11, Sydänmaa, Alavus',
+            rsvpButton: 'Anmälan'
         },
         rsvp: {
-            pageTitle: 'RSVP',
-            submit: 'Skicka RSVP',
+            pageTitle: 'Anmälan',
+            submit: 'Skicka anmälan',
             thankYouTitle: 'Tack!',
-            thankYouText: 'Din RSVP har skickats. Du kan uppdatera den när som helst.',
+            thankYouText: 'Din anmälan har skickats. Du kan gå tillbaka och uppdatera den när som helst.',
             noGroup: 'Ingen gruppdata hittades. Verifiera igen.',
-            invalidData: 'Ogiltiga data: gruppID eller uppdateringar saknas.',
-            submissionFailed: 'Skicket misslyckades.',
-            attendingLabel: 'Närvarande:',
+            invalidData: 'Ogiltigt data: gruppID eller uppdateringar saknas.',
+            submissionFailed: 'Formulärets skickande misslyckades.',
+            attendingLabel: 'Närvaro:',
             attendingSelectDefault: 'Välj',
             yes: 'Ja',
             no: 'Nej',
-            dietaryLabel: 'Dietrestriktioner:',
+            dietaryLabel: 'Specialkost:',
             dietaryPlaceholder: 't.ex., vegetarisk',
-            transportLabel: 'Behöver buss:'
+            transportLabel: 'Behöver busstransport (från Seinäjoki):'
         }
     },
     fi: {
@@ -167,14 +167,14 @@ const translations = {
             mainHeading: 'Olemme kihlassa!',
             welcome: 'Liity seuraamme juhlimaan rakkauttamme ihmisten ympäröimänä, joita arvostamme eniten. Emme malta odottaa jakavamme tätä erityistä päivää kanssasi!',
             details: 'Vaihdomme lupauksemme lauantaina 13. kesäkuuta 2026 klo 15.00 kauniissa Kuorasjärven kartanossa. Saavu mielellään vähintään 15 minuuttia ennen seremonian alkua. Seremonian jälkeen juhlimme yhdessä ruokien, juomien ja tanssin parissa. Alustava aikataulumme on, että ruokailu alkaa klo 17.00.',
-            gift: 'Häälahjana pyydämme lahjoituksia häämatkaamme varten. Ne voi tallettaa seuraavalle pankkitilille:<br/><strong>IBAN:</strong> FI53 3939 0038 8658 12<br/><strong>Saaja:</strong> Hanna Koskela<br/>Kiitos, että autat meitä luomaan unohtumattomia muistoja yhdessä!',
+            gift: 'Häälahjana pyydämme lahjoituksia häämatkaamme varten. Ne voi tallettaa seuraavalle pankkitilille:<br/>IBAN: FI53 3939 0038 8658 12<br/>Saaja: Hanna Koskela<br/>Kiitos, että autat meitä luomaan unohtumattomia muistoja yhdessä!',
             dress: 'Pukeudu virallisesti – haluamme, että näytät ja tunnet olosi parhaaksi juhliessamme yhdessä!',
             invite: 'Kutsu on voimassa vain nimetylle henkilölle.',
             travelTitle: 'Matkustus & majoitus',
             travelBus: 'Bussi Seinäjoelle ja takaisin on järjestetty. Ilmoita kuljetustarpeestasi RSVP-lomakkeessa.',
             travelHotels: 'Alta löydät suositeltuja hotelleja Seinäjoella lähellä rautatieasemaa.',
             venueTitle: 'Paikan tiedot',
-            venueAddress: '<strong>Osoite:</strong> Hiidenniementie 11, Sydänmaa, Alavus',
+            venueAddress: 'Osoite: Hiidenniementie 11, Sydänmaa, Alavus',
             rsvpButton: 'Vastaa kutsuun'
         },
         rsvp: {
