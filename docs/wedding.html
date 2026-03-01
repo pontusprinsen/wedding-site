@@ -16,11 +16,9 @@
         </div>
     </header>
     <main class="container">
-        <h1 data-i18n="wedding.mainHeading">We're getting married!</h1>
+        <h1 data-i18n="wedding.mainHeading"></h1>
         <section class="card">
-            <p data-i18n="wedding.welcome">We are thrilled to announce that we are tying the knot! After these years of love, laughter, and adventures
-                together, we have decided to take the next step in our journey as a couple. We can't wait to celebrate this
-                special day with all of you!</p>
+            <p data-i18n="wedding.welcome"></p>
             <section class="carousel" aria-label="Gallery">
                 <ol class="carousel__viewport">
                     <li id="carousel__slide1" tabindex="0" class="carousel__slide">
@@ -72,34 +70,21 @@
             </section>
         </section>
         <section class="card">
-            <p data-i18n-html="wedding.details">We're saying our vows on Saturday, June 13th, 2026 at 3:00 PM at the beautiful Kuorasjärven kartano.
-                Please arrive at least 15 minutes before the ceremony starts. After the ceremony, we'll celebrate together with food, drinks, and dancing right there
-                at the venue. Our preliminary schedule has the dining starting at 5:00 PM.</p>
-            <p data-i18n-html="wedding.gift">As a wedding gift, we are asking for contributions towards our honeymoon fund. It can be deposited in the following bank account:
-                <br/>IBAN: FI53 3939 0038 8658 12
-                <br/>Recipient: Hanna Koskela
-                <br/>Thank you for helping us create unforgettable memories together!
-            </p>
-            <p data-i18n="wedding.dress">Please dress formally — we'd love for you to look and feel your best as we celebrate together!</p>
-            <p data-i18n="wedding.invite">The invite is only valid for the named people.</p>
+            <p data-i18n-html="wedding.details"></p>
+            <p data-i18n-html="wedding.gift"></p>
+            <p data-i18n="wedding.dress"></p>
+            <p data-i18n="wedding.invite"></p>
         </section>
         <section class="card">
-            <h2 data-i18n="wedding.travelTitle">Travel & Accommodation</h2>
-            <p data-i18n="wedding.travelBus">Bus transport to and from Seinäjoki will be provided.
-                Please indicate your need for transport in the RSVP form.</p>
-            <p data-i18n="wedding.travelHotels">Below you can find recommended hotels in Seinäjoki close to the train station.</p>
-                <h4>Hotel Alma</h4>
-                <p>Discount: -15% from 12.-14.6. with code Prinsén2026</p>
-                <h4>Original Sokos Hotel Vaakuna</h4>
-                <h4>Original Sokos Hotel Lakeus</h4>
-                <h4>Scandic Seinäjoki</h4>
-            
+            <h2 data-i18n="wedding.travelTitle"></h2>
+            <p data-i18n="wedding.travelBus"></p>
+            <p data-i18n="wedding.travelHotels"></p>
+            <div id="hotels-list"></div>
         </section>
         
         <section class="card">
-            <h2 data-i18n="wedding.venueTitle">Venue Details</h2>
-            <p data-i18n-html="wedding.venueAddress">Address: Hiidenniementie 11,
-                Sydänmaa, Alavus</p>
+            <h2 data-i18n="wedding.venueTitle"></h2>
+            <p data-i18n-html="wedding.venueAddress"></p>
             <div class="map-container">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3665.0805594761323!2d23.25377422450267!3d62.657782607878254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46863a692ead606b%3A0x4e9268e2623ddf4a!2sHiidenniementie%2011%2C%2061170%20Alavus!5e0!3m2!1sen!2sfi!4v1771260140691!5m2!1sen!2sfi"
                 style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
@@ -108,13 +93,13 @@
         </section>
 
         <section class="center">
-            <button onclick="window.location.href='rsvp.html'" data-i18n="wedding.rsvpButton">RSVP Now</button>
+            <button onclick="window.location.href='rsvp.html'" data-i18n="wedding.rsvpButton"></button>
         </section>
 
 
     </main>
     <footer class="center">
-        <p>© 2026 Hanna & Pontus.</p>
+        <p id="footer-text"></p>
     </footer>
     <script src="scripts.js"></script>
 </body>

@@ -97,7 +97,14 @@ const translations = {
             travelHotels: 'Below you can find recommended hotels in Seinäjoki close to the train station.',
             venueTitle: 'Venue Details',
             venueAddress: 'Address: Hiidenniementie 11, Sydänmaa, Alavus',
-            rsvpButton: 'RSVP Now'
+            rsvpButton: 'RSVP Now',
+            footerText: '© 2026 Hanna & Pontus.',
+            hotels: [
+                { name: 'Hotel Alma', info: 'Discount: -15% from 12.-14.6. with code Prinsén2026' },
+                { name: 'Original Sokos Hotel Vaakuna', info: '' },
+                { name: 'Original Sokos Hotel Lakeus', info: '' },
+                { name: 'Scandic Seinäjoki', info: '' }
+            ]
         },
         rsvp: {
             pageTitle: 'RSVP',
@@ -113,8 +120,9 @@ const translations = {
             no: 'No',
             dietaryLabel: 'Dietary Restrictions:',
             dietaryPlaceholder: 'e.g., vegetarian',
-            transportLabel: 'Need Bus Transport:'
-        }
+            transportLabel: 'Need Bus Transport:',
+            footerText: '© 2026 Hanna & Pontus.'
+        },
     },
     sv: {
         index: {
@@ -136,7 +144,14 @@ const translations = {
             travelHotels: 'Nedan hittar du rekommenderade hotell i Seinäjoki.',
             venueTitle: 'Platsinformation',
             venueAddress: 'Adress: Hiidenniementie 11, Sydänmaa, Alavus',
-            rsvpButton: 'Anmälan'
+            rsvpButton: 'Anmälan',
+            footerText: '© 2026 Hanna & Pontus.',
+            hotels: [
+                { name: 'Hotel Alma', info: 'Rabatt: -15% från 12.-14.6. med kod Prinsén2026' },
+                { name: 'Original Sokos Hotel Vaakuna', info: '' },
+                { name: 'Original Sokos Hotel Lakeus', info: '' },
+                { name: 'Scandic Seinäjoki', info: '' }
+            ]
         },
         rsvp: {
             pageTitle: 'Anmälan',
@@ -152,7 +167,8 @@ const translations = {
             no: 'Nej',
             dietaryLabel: 'Specialkost:',
             dietaryPlaceholder: 't.ex., vegetarisk',
-            transportLabel: 'Behöver busstransport (från Seinäjoki):'
+            transportLabel: 'Behöver busstransport (från Seinäjoki):',
+            footerText: '© 2026 Hanna & Pontus.'
         }
     },
     fi: {
@@ -175,7 +191,14 @@ const translations = {
             travelHotels: 'Alta löydät suositeltuja hotelleja Seinäjoella lähellä rautatieasemaa.',
             venueTitle: 'Paikan tiedot',
             venueAddress: 'Osoite: Hiidenniementie 11, Sydänmaa, Alavus',
-            rsvpButton: 'Vastaa kutsuun'
+            rsvpButton: 'Vastaa kutsuun',
+            footerText: '© 2026 Hanna & Pontus.',
+            hotels: [
+                { name: 'Hotel Alma', info: 'Alennus: -15% 12.-14.6. koodilla Prinsén2026' },
+                { name: 'Original Sokos Hotel Vaakuna', info: '' },
+                { name: 'Original Sokos Hotel Lakeus', info: '' },
+                { name: 'Scandic Seinäjoki', info: '' }
+            ]
         },
         rsvp: {
             pageTitle: 'RSVP',
@@ -191,7 +214,9 @@ const translations = {
             no: 'Ei',
             dietaryLabel: 'Ravintorajoitukset:',
             dietaryPlaceholder: 'esim. kasvisruokavalio',
-            transportLabel: 'Tarvitseeko bussin:'
+            transportLabel: 'Tarvitseeko bussin:',
+            footerText: '© 2026 Hanna & Pontus.'
+        }
         }
     }
 };
@@ -236,7 +261,24 @@ function applyTranslations(){
     document.querySelectorAll('[data-i18n-html]').forEach(el=>{
         el.innerHTML = t(el.dataset.i18nHtml);
     });
+    
+    // Handle footer text
+    const footerEl = document.getElementById('footer-text');
+    if (footerEl) {
+        footerEl.textContent = t('wedding.footerText') || t('rsvp.footerText') || '© 2026 Hanna & Pontus.';
+    }
+    
+    // Populate hotels list on wedding page
+    const hotelsList = document.getElementById('hotels-list');
+    if (hotelsList) {
+        const lang = getPreferredLanguage();
+        const hotels = translations[lang].wedding.hotels || [];
+        hotelsList.innerHTML = hotels.map(h => 
+            `<div class="hotel-item"><h4>${h.name}</h4>${h.info ? `<p>${h.info}</p>` : ''}</div>`
+        ).join('');
+    }
 }
+
 
 // Page-specific logic (called on load)
 function initPage() {
