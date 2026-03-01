@@ -95,3 +95,76 @@ function initPage() {
 
 // Run on page load
 document.addEventListener('DOMContentLoaded', initPage);
+
+// Initialize carousel controls and dots
+function initCarousel() {
+    const viewport = document.querySelector('.carousel__viewport');
+    if (!viewport) return;
+    const slides = Array.from(viewport.querySelectorAll('.carousel__slide'));
+    const prevBtn = document.querySelector('.carousel__control--prev');
+    const nextBtn = document.querySelector('.carousel__control--next');
+    const dotsContainer = document.querySelector('.carousel__dots');
+    if (!dotsContainer) return;
+
+    let currentIndex = 0;
+    let scrollTimer = null;
+
+    // build dots
+    slides.forEach((slide, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'carousel__dot';
+        btn.setAttribute('aria-label', `Go to slide ${i+1}`);
+        btn.addEventListener('click', () => {
+            slide.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+            setActive(i);
+            history.replaceState(null, '', `#${slide.id}`);
+        });
+        dotsContainer.appendChild(btn);
+    });
+
+    function setActive(index) {
+        currentIndex = index;
+        slides[index].focus({ preventScroll: true });
+        const allDots = dotsContainer.querySelectorAll('.carousel__dot');
+        allDots.forEach((d, di) => d.classList.toggle('active', di === index));
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => {
+        const target = (currentIndex - 1 + slides.length) % slides.length;
+        slides[target].scrollIntoView({ behavior: 'smooth', inline: 'start' });
+        setActive(target);
+        history.replaceState(null, '', `#${slides[target].id}`);
+    });
+
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+        const target = (currentIndex + 1) % slides.length;
+        slides[target].scrollIntoView({ behavior: 'smooth', inline: 'start' });
+        setActive(target);
+        history.replaceState(null, '', `#${slides[target].id}`);
+    });
+
+    // Update active slide on scroll (debounced)
+    viewport.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+            const slideWidth = viewport.clientWidth;
+            const idx = Math.round(viewport.scrollLeft / slideWidth);
+            const clamped = Math.min(Math.max(idx, 0), slides.length - 1);
+            setActive(clamped);
+            history.replaceState(null, '', `#${slides[clamped].id}`);
+        }, 80);
+    });
+
+    // Initial position from hash or first slide
+    const initialHash = window.location.hash.replace('#', '');
+    let initialIndex = 0;
+    if (initialHash) {
+        const el = document.getElementById(initialHash);
+        if (el) initialIndex = slides.indexOf(el);
+    }
+    slides[initialIndex].scrollIntoView({ behavior: 'auto', inline: 'start' });
+    setActive(initialIndex);
+}
+
+document.addEventListener('DOMContentLoaded', initCarousel);
