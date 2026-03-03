@@ -147,7 +147,7 @@ const translations = {
             rsvpButton: 'Anmälan',
             footerText: '© 2026 Hanna & Pontus.',
             hotels: [
-                { name: 'Hotel Alma', info: 'Rabatt: -15% från 12.-14.6. med koden Prinsén2026' },
+                { name: 'Hotell Alma', info: 'Rabatt: -15% från 12.-14.6. med koden Prinsén2026' },
                 { name: 'Original Sokos Hotel Vaakuna', info: '' },
                 { name: 'Original Sokos Hotel Lakeus', info: '' },
                 { name: 'Scandic Seinäjoki', info: '' }
@@ -180,21 +180,21 @@ const translations = {
             errorNotFound: 'Nimeä ei löytynyt. Tarkista kirjoitusasu.'
         },
         wedding: {
-            mainHeading: 'Olemme kihlassa!',
-            welcome: 'Liity seuraamme juhlimaan rakkauttamme ihmisten ympäröimänä, joita arvostamme eniten. Emme malta odottaa jakavamme tätä erityistä päivää kanssasi!',
-            details: 'Vaihdomme lupauksemme lauantaina 13. kesäkuuta 2026 klo 15.00 kauniissa Kuorasjärven kartanossa. Saavu mielellään vähintään 15 minuuttia ennen seremonian alkua. Seremonian jälkeen juhlimme yhdessä ruokien, juomien ja tanssin parissa. Alustava aikataulumme on, että ruokailu alkaa klo 17.00.',
-            gift: 'Häälahjana pyydämme lahjoituksia häämatkaamme varten. Ne voi tallettaa seuraavalle pankkitilille:<br/>IBAN: FI53 3939 0038 8658 12<br/>Saaja: Hanna Koskela<br/>Kiitos, että autat meitä luomaan unohtumattomia muistoja yhdessä!',
-            dress: 'Pukeudu virallisesti – haluamme, että näytät ja tunnet olosi parhaaksi juhliessamme yhdessä!',
-            invite: 'Ilmoittakaa kutsuun viimeistään 30. huhtikuuta 2026. Kutsu on voimassa vain nimetylle henkilölle.',
+            mainHeading: 'Me mennään naimisiin!',
+            welcome: 'Liity seuraamme, kun juhlistamme rakkauttamme meille tärkeimpien ihmisten ympäröimänä. Emme malta odottaa, että pääsemme jakamaan meille hyvin erityisen päivän teidän kaikkien kanssa!',
+            details: 'Vaihdomme lupauksemme lauantaina 13. kesäkuuta 2026 klo 15.00 kauniissa Kuorasjärven kartanossa. Saavu mielellään vähintään 15 minuuttia ennen seremonian alkua. Seremonian jälkeen juhlimme yhdessä ruokien, juomien ja tanssin parissa. Alustava aikataulumme on, että ruokVannomme valamme lauantaina 13. kesäkuuta 2026 klo 15:00 kauniilla Kuorasjärven kartanolla. Pyydämme teitä saapumaan vähintään 15 minuuttia ennen seremonian alkua. Seremonian jälkeen juhlat jatkuvat samassa paikassa kera ruuan, juoman ja tanssin. Pyydämme huomioimaan, että alustavan aikataulun mukaisesti ruokailu alkaa klo 17:00.',
+            gift: 'Meille tärkeintä on, että olette läsnä juhlissamme. Halutessanne muistaa meitä muutenkin kuin läsnäolollanne, toivomme kontribuutiota häämatkaamme varten. Tämän voi osoittaa yhteiselle pankkitilillemme:<br/>IBAN: FI53 3939 0038 8658 12<br/>Saaja: Hanna Koskela<br/>Kiitämme päästessämme luomaan lisää unohtumattomia muistoja yhdessä!',
+            dress: 'Häidemme pukukoodi on juhlallinen pukeutuminen. Toivomme, että tunnet olosi parhaaksi juhliessamme yhdessä!',
+            invite: 'Pyydämme teitä ystävällisesti ilmoittamaan osallistumisestanne taikka esteestänne osallistua viimeistään 30. huhtikuuta 2026. Kutsu on voimassa vain erikseen nimetyille henkilöille.',
             travelTitle: 'Matkustus & majoitus',
-            travelBus: 'Bussi Seinäjoelle ja takaisin on järjestetty. Ilmoita kuljetustarpeestasi RSVP-lomakkeessa.',
-            travelHotels: 'Alta löydät suositeltuja hotelleja Seinäjoella lähellä rautatieasemaa.',
+            travelBus: 'Olemme järjestäneet bussikuljetuksen Seinäjoelta hääpaikalle ja takaisin. Pyydämme ilmoittamaan tarpeestasi kuljetukseen ilmoittautumislomakkeessa.',
+            travelHotels: 'Alta löydät suositeltuja hotelleja Seinäjoella lähellä rautatieasemaa',
             venueTitle: 'Juhlapaikan tiedot',
             venueAddress: 'Osoite: Hiidenniementie 11, Sydänmaa, Alavus',
             rsvpButton: 'Vastaa kutsuun',
             footerText: '© 2026 Hanna & Pontus.',
             hotels: [
-                { name: 'Hotel Alma', info: 'Alennus: -15% 12.-14.6. koodilla Prinsén2026' },
+                { name: 'Hotelli Alma', info: 'Alennus: -15% 12.-14.6. koodilla Prinsén2026' },
                 { name: 'Original Sokos Hotel Vaakuna', info: '' },
                 { name: 'Original Sokos Hotel Lakeus', info: '' },
                 { name: 'Scandic Seinäjoki', info: '' }
