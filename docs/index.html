@@ -26,6 +26,9 @@
             <button type="submit" data-i18n="index.enter"></button>
         </form>
         <div id="error-message" style="color: red; display: none;"></div>
+        <div id="loading-indicator" class="loading-container" style="display: none;">
+            <div class="spinner"></div>
+        </div>
     </main>
     <footer class="center">
         <p id="footer-text"></p>
@@ -37,13 +40,20 @@
             e.preventDefault();
             const name = document.getElementById('guestname').value.trim();
             const errorDiv = document.getElementById('error-message');
+            const loadingDiv = document.getElementById('loading-indicator');
             
             if (!name) return;
+            
+            // Show loading indicator and hide error message
+            loadingDiv.style.display = 'flex';
+            errorDiv.style.display = 'none';
             
             const result = await verifyGuest(name);
             if (result.success) {
                 window.location.href = 'wedding.html';
             } else {
+                // Hide loading indicator and show error message
+                loadingDiv.style.display = 'none';
                 const msg = result.message || t('index.errorNotFound');
                 errorDiv.textContent = msg;
                 errorDiv.style.display = 'block';
