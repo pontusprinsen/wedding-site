@@ -214,7 +214,7 @@ const translations = {
             no: 'Ei',
             dietaryLabel: 'Ravintorajoitukset:',
             dietaryPlaceholder: 'esim. kasvisruokavalio',
-            transportLabel: 'Tarvitseeko bussin Seinäjoelta:',
+            transportLabel: 'Tarvitsetko kuljetuksen Seinäjoelta:',
             footerText: '© 2026 Hanna & Pontus.'
         }
     }
